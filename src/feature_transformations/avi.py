@@ -69,7 +69,7 @@ class AVI:
 
         X_train_transformed = self.sets_avi.G_evaluations
         if X_train_transformed is not None:
-            X_train_transformed = cp.abs(X_train_transformed)
+            X_train_transformed =  X_train_transformed**2
         else:
             X_train_transformed = None
         return cp.abs(X_train_transformed), self.sets_avi

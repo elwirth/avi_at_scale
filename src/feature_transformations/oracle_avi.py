@@ -180,7 +180,7 @@ class OracleAVI:
                 self.sets_avi.update_O(fd(border_terms[:, O_indices]), fd(border_evaluations[:, O_indices]), O_indices)
         X_train_transformed = self.sets_avi.G_evaluations
         if X_train_transformed is not None:
-            X_train_transformed = cp.abs(X_train_transformed)
+            X_train_transformed =  X_train_transformed**2
         else:
             X_train_transformed = None
         return X_train_transformed, self.sets_avi

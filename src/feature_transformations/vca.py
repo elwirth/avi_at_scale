@@ -66,7 +66,7 @@ class VCA:
 
         X_train_transformed = self.sets_vca.V_to_array()
         if X_train_transformed is not None:
-            X_train_transformed = cp.abs(X_train_transformed)
+            X_train_transformed =  X_train_transformed**2
         else:
             X_train_transformed = None
         return X_train_transformed, self.sets_vca
