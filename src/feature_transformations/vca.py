@@ -66,7 +66,7 @@ class VCA:
 
         X_train_transformed = self.sets_vca.V_to_array()
         if X_train_transformed is not None:
-            X_train_transformed =  X_train_transformed**2
+            X_train_transformed = X_train_transformed ** 2
         else:
             X_train_transformed = None
         return X_train_transformed, self.sets_vca
@@ -75,7 +75,7 @@ class VCA:
         """Applies the VCA feature transformation to X_test."""
         X_test_transformed, self.sets_vca_test = self.sets_vca.apply_V_transformation(X_test)
         if X_test_transformed is not None:
-            X_test_transformed = cp.abs(X_test_transformed)
+            X_test_transformed = X_test_transformed ** 2
         else:
             X_test_transformed = None
         return cp.abs(X_test_transformed), self.sets_vca_test

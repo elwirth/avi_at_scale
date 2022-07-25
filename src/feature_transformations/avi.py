@@ -27,6 +27,7 @@ class AVI:
         [1] Heldt, D., Kreuzer, M., Pokutta, S. and Poulisse, H., 2009. Approximate computation of zero-dimensional
         polynomial ideals. Journal of Symbolic Computation, 44(11), pp.1566-1591.
     """
+
     def __init__(self, psi: float = 0.1, tau: float = 10, max_degree: int = 10):
         self.psi = psi
         self.tau = tau
@@ -69,7 +70,7 @@ class AVI:
 
         X_train_transformed = self.sets_avi.G_evaluations
         if X_train_transformed is not None:
-            X_train_transformed =  X_train_transformed**2
+            X_train_transformed = X_train_transformed ** 2
         else:
             X_train_transformed = None
         return cp.abs(X_train_transformed), self.sets_avi
@@ -78,7 +79,7 @@ class AVI:
         """Applies the AVI feature transformation to X_test."""
         X_test_transformed, test_sets_avi = self.sets_avi.apply_G_transformation(X_test)
         if X_test_transformed is not None:
-            X_test_transformed = cp.abs(X_test_transformed)
+            X_test_transformed = X_test_transformed ** 2
         else:
             X_test_transformed = None
         return cp.abs(X_test_transformed), test_sets_avi

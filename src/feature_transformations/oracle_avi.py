@@ -180,7 +180,7 @@ class OracleAVI:
                 self.sets_avi.update_O(fd(border_terms[:, O_indices]), fd(border_evaluations[:, O_indices]), O_indices)
         X_train_transformed = self.sets_avi.G_evaluations
         if X_train_transformed is not None:
-            X_train_transformed =  X_train_transformed**2
+            X_train_transformed = X_train_transformed ** 2
         else:
             X_train_transformed = None
         return X_train_transformed, self.sets_avi
@@ -219,27 +219,28 @@ class OracleAVI:
                 region = L2Ball(data.shape[1], self.tau - 1)
 
             if self.inverse_hessian_boost == "weak":
-                assert self.oracle_type in ["CG", "PCG", "BPCG"], "WIHB is only implemented for Conditional Gradients algorithms."
+                assert self.oracle_type in ["CG", "PCG",
+                                            "BPCG"], "WIHB is only implemented for Conditional Gradients algorithms."
 
                 oracle = ConditionalGradients(objective_function=objective,
-                                    feasible_region=region,
-                                    oracle_type="CG",
-                                    psi=self.psi,
-                                    eps=self.eps,
-                                    max_iterations=self.max_iterations,
-                                    tol=self.tol,
-                                    inverse_hessian_boost="full")
+                                              feasible_region=region,
+                                              oracle_type="CG",
+                                              psi=self.psi,
+                                              eps=self.eps,
+                                              max_iterations=self.max_iterations,
+                                              tol=self.tol,
+                                              inverse_hessian_boost="full")
                 tmp_coefficient_vector, loss_list, _ = oracle.optimize()
                 loss = float(loss_list[-1])
                 if loss <= self.psi:
                     oracle = ConditionalGradients(objective_function=objective,
-                                        feasible_region=region,
-                                        oracle_type=self.oracle_type,
-                                        psi=self.psi,
-                                        eps=self.eps,
-                                        max_iterations=self.max_iterations,
-                                        tol=self.tol,
-                                        inverse_hessian_boost="false")
+                                                  feasible_region=region,
+                                                  oracle_type=self.oracle_type,
+                                                  psi=self.psi,
+                                                  eps=self.eps,
+                                                  max_iterations=self.max_iterations,
+                                                  tol=self.tol,
+                                                  inverse_hessian_boost="false")
                     tmp_coefficient_vector_2, loss_list_2, _ = oracle.optimize()
                     loss_2 = float(loss_list_2[-1])
 
@@ -250,13 +251,13 @@ class OracleAVI:
             else:
                 if self.oracle_type in ["CG", "PCG", "BPCG"]:
                     oracle = ConditionalGradients(objective_function=objective,
-                                        feasible_region=region,
-                                        oracle_type=self.oracle_type,
-                                        psi=self.psi,
-                                        eps=self.eps,
-                                        max_iterations=self.max_iterations,
-                                        tol=self.tol,
-                                        inverse_hessian_boost=self.inverse_hessian_boost)
+                                                  feasible_region=region,
+                                                  oracle_type=self.oracle_type,
+                                                  psi=self.psi,
+                                                  eps=self.eps,
+                                                  max_iterations=self.max_iterations,
+                                                  tol=self.tol,
+                                                  inverse_hessian_boost=self.inverse_hessian_boost)
 
                 elif self.oracle_type == "AGD":
                     oracle = AcceleratedGradientDescent(objective_function=objective,
@@ -289,7 +290,7 @@ class OracleAVI:
         X_test = X_test[:, self.term_ordering]
         X_test_transformed, test_sets_avi = self.sets_avi.apply_G_transformation(X_test)
         if X_test_transformed is not None:
-            X_test_transformed = cp.abs(X_test_transformed)
+            X_test_transformed = X_test_transformed ** 2
         else:
             X_test_transformed = None
         return X_test_transformed, test_sets_avi
