@@ -1,6 +1,3 @@
-
-import numpy as np
-gpu_memory_ = 6000
 n_seed_ = 3
 
 n_runs_ = 10
@@ -23,7 +20,6 @@ Cs_single_ = [1]
 degrees_ = [1, 2, 3, 4]
 
 psis_ = [0.1, 0.05, 0.01, 0.005, 0.001, 0.0005, 0.0001]
-# psis_ = np.logspace(-0.5, -5.0, num=10).tolist()
 psis_single_ = [0.005]
 
 
