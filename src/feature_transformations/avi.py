@@ -70,7 +70,7 @@ class AVI:
 
         X_train_transformed = self.sets_avi.G_evaluations
         if X_train_transformed is not None:
-            X_train_transformed = X_train_transformed ** 2
+            X_train_transformed = cp.abs(X_train_transformed)
         else:
             X_train_transformed = None
         return cp.abs(X_train_transformed), self.sets_avi
@@ -79,7 +79,7 @@ class AVI:
         """Applies the AVI feature transformation to X_test."""
         X_test_transformed, test_sets_avi = self.sets_avi.apply_G_transformation(X_test)
         if X_test_transformed is not None:
-            X_test_transformed = X_test_transformed ** 2
+            X_test_transformed = cp.abs(X_test_transformed)
         else:
             X_test_transformed = None
         return cp.abs(X_test_transformed), test_sets_avi
